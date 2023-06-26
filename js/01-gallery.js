@@ -19,7 +19,10 @@ gallery.insertAdjacentHTML("beforeend", markup)
 
 gallery.addEventListener('click', onClick)
 
+let instance = null
+
 function onClick(evt) {  
+  
   evt.preventDefault();
 
   if (evt.target.classList.contains('gallery__image')) {
@@ -28,15 +31,15 @@ function onClick(evt) {
    
     const modalImage = `<img src="${source}">`;
 
-    const instance = basicLightbox.create(modalImage);
+    instance = basicLightbox.create(modalImage);
    
     instance.show();
     
-    document.addEventListener('keydown', evt => {
-      if (evt.key === 'Escape') {
-        instance.close();
-      }
-    });
   }
 
 }
+window.addEventListener('keydown', evt => {
+  if (evt.key === 'Escape') {
+    instance.close();
+  }
+});
